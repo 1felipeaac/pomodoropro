@@ -1,0 +1,149 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    font-size: 62.5%;
+    --bg-color: #E5E5E5;
+    --bg-sound: #E1E1E6;
+    --ff-timer: 'Roboto', sans-serif;
+    --bg-sound-selected: #02799D;
+    --fc-font-svg: #323238;
+    --fc-sound-selected: #FFFFFF;
+}
+
+body{
+    background: var(--bg-color);
+    font-family: var(--ff-timer);
+
+    display: grid;
+    place-items: center;
+
+    height: 100vh;
+}
+
+button, label{
+    cursor: pointer;
+}
+
+#container{
+    min-width: 32rem;
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10rem;
+
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4.8rem;
+}
+
+.timer{
+    display: flex;
+    align-items: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: clamp(10rem, 1rem + 15vh, 12.6rem);
+    line-height: 14.8rem;
+    /* identical to box height */
+
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#minutes, #seconds{
+    cursor: pointer;
+    filter: opacity(0.5);
+}
+
+.hide{
+    display: none;
+}
+
+#buttons{
+    display: flex;
+    align-items: center;
+    gap: 2.8rem;
+}
+
+button{
+    border: none;
+    background-color: transparent;
+}
+
+aside{
+    display: flex;
+    justify-content: center;
+}
+
+#sounds{
+    list-style: none;
+    display: grid;
+    grid-template-areas: 
+    "tree cloud"
+    "house flame";
+    row-gap: 3.2rem;
+    column-gap: 3.2rem;
+    pointer-events: none;
+}
+
+.btn-select{
+    appearance: none;
+    display: none;
+}
+
+.btn-select:checked + label{
+    background-color: var(--bg-sound-selected);
+}
+
+.btn-select:checked + label svg path{
+    fill: var(--fc-sound-selected);
+}
+
+#forest{
+    grid-area: tree;
+}
+
+#rain{
+    grid-area: cloud;
+}
+
+#coffeeShop{
+    grid-area: house;
+}
+
+#firePlace{
+    grid-area: flame;
+}
+
+label{
+    width: 13.8rem;
+    height: 15.2rem;
+
+    background: var(--bg-sound);
+    border-radius: 2.4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+   
+    #container{
+        flex-direction: row;
+        width: 81rem;
+        height: 33.6rem;
+        gap: 18.1rem;
+    }
+    #off{
+        top: 45.6rem;
+    }
+}
