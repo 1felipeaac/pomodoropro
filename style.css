@@ -22,6 +22,8 @@ body{
     place-items: center;
 
     height: 100vh;
+
+    color: var(--fc-font-svg);
 }
 
 button, label{
@@ -45,23 +47,24 @@ main{
     gap: 4.8rem;
 }
 
-.timer{
-    display: flex;
-    align-items: center;
+main #timer{
     font-style: normal;
     font-weight: 500;
     font-size: clamp(10rem, 1rem + 15vh, 12.6rem);
     line-height: 14.8rem;
-    /* identical to box height */
 
     text-align: center;
     text-transform: uppercase;
+
+    display: flex;
+    align-items: center;
 }
 
 #minutes, #seconds{
     cursor: pointer;
     filter: opacity(0.5);
 }
+
 
 .hide{
     display: none;
@@ -78,6 +81,10 @@ button{
     background-color: transparent;
 }
 
+button:active{
+    transform: scale(0.98);
+}
+
 aside{
     display: flex;
     justify-content: center;
@@ -91,7 +98,6 @@ aside{
     "house flame";
     row-gap: 3.2rem;
     column-gap: 3.2rem;
-    pointer-events: none;
 }
 
 .btn-select{
@@ -105,6 +111,14 @@ aside{
 
 .btn-select:checked + label svg path{
     fill: var(--fc-sound-selected);
+}
+
+.btn-select:checked + label input[type="range"]{
+    background: var(--fc-sound-selected);
+}
+
+.btn-select:checked + label input[type="range"]::-webkit-slider-thumb{
+    background: var(--fc-sound-selected);
 }
 
 #forest{
@@ -131,8 +145,24 @@ label{
     border-radius: 2.4rem;
 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
+}
+
+input[type="range"]{
+    width: 9rem;
+    height: 0.4rem;
+    appearance: none;
+    background: var(--fc-font-svg);
+}
+
+input[type="range"]::-webkit-slider-thumb{
+    width: 1.6rem;
+    height: 1.6rem;
+    appearance: none;
+    background: var(--fc-font-svg);
+    border-radius: 100%;
 }
 
 @media (min-width: 1024px) {
@@ -142,8 +172,5 @@ label{
         width: 81rem;
         height: 33.6rem;
         gap: 18.1rem;
-    }
-    #off{
-        top: 45.6rem;
     }
 }
