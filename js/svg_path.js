@@ -1,17 +1,19 @@
-const btnPlus = document.querySelector("#button-plus")
-const btnPlusSvg = btnPlus.querySelector("svg")
+import Sound from './sounds.js'
+import {Selectors} from './selectors.js'
+
+const buttonSound = Sound()
+
+
+const btnPlusSvg = Selectors.btnPlus.querySelector("svg")
 const btnPlusSvgPath = btnPlusSvg.querySelector("path")
 
-const btnMinun = document.querySelector("#button-minun")
-const btnMinunSvg = btnMinun.querySelector("svg")
+const btnMinunSvg = Selectors.btnMinun.querySelector("svg")
 const btnMinunSvgPath = btnMinunSvg.querySelector("path")
 
-const btnPlay = document.querySelector("#button-play")
-const btnPlaySvg = btnPlay.querySelector("svg")
+const btnPlaySvg = Selectors.btnPlay.querySelector("svg")
 const btnPlaySvgPath = btnPlaySvg.querySelector("path")
 
-const btnStop = document.querySelector("#button-stop")
-const btnStopSvg = btnStop.querySelector("svg")
+const btnStopSvg = Selectors.btnStop.querySelector("svg")
 const btnStopSvgPath = btnStopSvg.querySelector("path")
 
 
@@ -32,6 +34,7 @@ function clickButtonStop(){
 }
 
 function clickButtonMinunFalse(){
+    buttonSound.pressButton()
     let cont = 5
     const click = setInterval(()=>{
         btnMinunSvgPath.setAttribute("fill", "#ee3a1f")
@@ -43,6 +46,7 @@ function clickButtonMinunFalse(){
 }
 
 function eventClickButtons(button){
+    buttonSound.pressButton()
     let cont = 5
     const click = setInterval(()=>{
         button.setAttribute("fill", "#02799D")
