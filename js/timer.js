@@ -1,4 +1,5 @@
 import { checkedFalse, bgAudio } from "./ambientSounds.js"
+import { clickButtonMinun, clickButtonMinunFalse, clickButtonPlay, clickButtonPlus, clickButtonStop } from "./svg_path.js"
 
 let minutesDisplay = document.querySelector("#minutes")
 let secondsDisplay = document.querySelector("#seconds")
@@ -17,9 +18,12 @@ let setTimer = 0
 function countDown(){
 
     if(setMinutes != undefined && setSeconds != undefined){
+        clickButtonPlay()
    
         minutesDisplay.style.pointerEvents = "none"
         secondsDisplay.style.pointerEvents = "none"
+
+        play.style.pointerEvents = "none"
 
         buttonsSounds.style.pointerEvents = "all"
 
@@ -50,6 +54,7 @@ function finishTimer(){
     minutesDisplay.style.opacity = "0.5"
     secondsDisplay.style.opacity = "0.5"
     buttonsSounds.style.pointerEvents = "none"
+    play.style.pointerEvents = "none"
 
     bgAudio.pauseAllSound()
     checkedFalse()
@@ -72,6 +77,7 @@ function inputTimer(){
 function buttonsFunctionalitys(){
     stop.addEventListener("click", function(){
         finishTimer()
+        clickButtonStop()
         minutesDisplay.textContent = "00"
         secondsDisplay.textContent = "00"
         secondsDisplay.style.filter = "opacity(1)"
@@ -80,11 +86,16 @@ function buttonsFunctionalitys(){
     
     addMinutes.addEventListener("click", function(){
         setTimer = setTimer + 300
+        clickButtonPlus()
     })
     
     removeMinutes.addEventListener("click", function(){
-        if(setTimer > 300)
+        if(setTimer > 300){
             setTimer = setTimer - 300
+            clickButtonMinun()
+        }else{
+            clickButtonMinunFalse()
+        }
     })
     
     play.addEventListener("click", countDown)
