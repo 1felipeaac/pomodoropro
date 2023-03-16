@@ -1,32 +1,58 @@
 import { checkedFalse, bgAudio } from "./ambientSounds.js"
+import { Selectors } from "./selectors.js"
+import Sound from "./sounds.js"
 import { clickButtonMinun, clickButtonMinunFalse, clickButtonPlay, clickButtonPlus, clickButtonStop } from "./svg_path.js"
 
-let minutesDisplay = document.querySelector("#minutes")
-let secondsDisplay = document.querySelector("#seconds")
+const finishTimerSound = Sound()
 
-const play = document.querySelector("#button-play")
-const stop = document.querySelector("#button-stop")
-const addMinutes = document.querySelector("#button-plus")
-const removeMinutes = document.querySelector("#button-minun")
-
-const buttonsSounds = document.querySelector("#sounds")
+const play = Selectors.play
+const stop = Selectors.stop
+const addMinutes = Selectors.addMinutes
+const removeMinutes = Selectors.removeMinutes
+const buttonsSounds = Selectors.buttonsSounds
+const secondsDisplay = Selectors.secondsDisplay
+const minutesDisplay = Selectors.minutesDisplay
 
 let setMinutes, setSeconds, intervalTimer
 let setTimer = 0
 
-play.style.pointerEvents = "all"
+buttonsPointerEventsNone()
 
+function buttonsPointerEventsNone(){
+    stop.style.pointerEvents = "none"
+    addMinutes.style.pointerEvents = "none"
+    removeMinutes.style.pointerEvents = "none"
+    buttonsSounds.style.pointerEvents = "none"
+}
+function buttonsPointerEventsAll(){
+    stop.style.pointerEvents = "all"
+    addMinutes.style.pointerEvents = "all"
+    removeMinutes.style.pointerEvents = "all"
+    buttonsSounds.style.pointerEvents = "all"
+}
+function timerDisplayOff(){
+    minutesDisplay.style.pointerEvents = "all"
+    secondsDisplay.style.pointerEvents = "all"
+    secondsDisplay.style.filter = "opacity(0.5)"
+    minutesDisplay.style.filter = "opacity(0.5)"
+}
+function timerDisplayOn(){
+    minutesDisplay.style.pointerEvents = "none"
+    secondsDisplay.style.pointerEvents = "none"
+}
+function setTimerDisplay(display, component){
+    display.innerText = String(component).padStart(2, "0")
+    display.style.filter = "opacity(1)"
+}
 function countDown(){
 
     if(setMinutes != undefined && setSeconds != undefined){
+
         clickButtonPlay()
    
-        minutesDisplay.style.pointerEvents = "none"
-        secondsDisplay.style.pointerEvents = "none"
-
-        play.style.pointerEvents = "none"
-
-        buttonsSounds.style.pointerEvents = "all"
+        timerDisplayOn()
+        
+        buttonsPointerEventsAll()
 
         setTimer  = setMinutes * 60 + setSeconds
         let interval = 1000
@@ -43,46 +69,38 @@ function countDown(){
 
             if(--setTimer < 0){
                 finishTimer()
+                finishTimerSound.timeEnd()
             }
 
         }, interval);
     }
 }
-
 function finishTimer(){
-    minutesDisplay.style.pointerEvents = "all"
-    secondsDisplay.style.pointerEvents = "all"
-    minutesDisplay.style.opacity = "0.5"
-    secondsDisplay.style.opacity = "0.5"
-    buttonsSounds.style.pointerEvents = "none"
-    play.style.pointerEvents = "all"
-
+    timerDisplayOff()
+    buttonsPointerEventsNone()
     bgAudio.pauseAllSound()
+    setSeconds = undefined
+    setMinutes = undefined
     checkedFalse()
     clearInterval(intervalTimer)
 }
-
 function inputTimer(){
     secondsDisplay.addEventListener("click", function(){
         setSeconds = Number(prompt("Digite os segundos"))
-        secondsDisplay.innerText = String(setSeconds).padStart(2,"0")
-        secondsDisplay.style.filter = "opacity(1)"
+        setTimerDisplay(secondsDisplay, setSeconds)
+        
     })
-    minutesDisplay.addEventListener("click", function(){
+    Selectors.minutesDisplay.addEventListener("click", function(){
         setMinutes = Number(prompt("Digite os minutos"))
-        minutesDisplay.innerText = String(setMinutes).padStart(2, "0")
-        minutesDisplay.style.filter = "opacity(1)"
+        setTimerDisplay(Selectors.minutesDisplay, setMinutes)
     })
 }
-
 function buttonsFunctionalitys(){
     stop.addEventListener("click", function(){
         finishTimer()
         clickButtonStop()
         minutesDisplay.textContent = "00"
         secondsDisplay.textContent = "00"
-        secondsDisplay.style.filter = "opacity(1)"
-        minutesDisplay.style.filter = "opacity(1)"
     })
     
     addMinutes.addEventListener("click", function(){
