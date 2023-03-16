@@ -14,6 +14,7 @@ const buttonsSounds = document.querySelector("#sounds")
 let setMinutes, setSeconds, intervalTimer
 let setTimer = 0
 
+play.style.pointerEvents = "all"
 
 function countDown(){
 
@@ -54,7 +55,7 @@ function finishTimer(){
     minutesDisplay.style.opacity = "0.5"
     secondsDisplay.style.opacity = "0.5"
     buttonsSounds.style.pointerEvents = "none"
-    play.style.pointerEvents = "none"
+    play.style.pointerEvents = "all"
 
     bgAudio.pauseAllSound()
     checkedFalse()
