@@ -40,6 +40,7 @@ export default function(){
 
     return{
         timeEnd,
+        pressButton,
         playSound,
         pauseAllSound,
         rain,
