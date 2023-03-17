@@ -22,7 +22,12 @@ export const Selectors = {
     removeMinutes : document.querySelector("#button-minun"),
 
     buttonsSounds : document.querySelector("#sounds"),
+    
+    sun : document.querySelector("#sun"),
+    moon : document.querySelector("#moon"),
+    body : document.querySelector("body"),
 
+    soundsSelect : document.querySelectorAll(".sounds-select")
 }
 
 
