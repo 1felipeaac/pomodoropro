@@ -1,9 +1,6 @@
 import { checkedFalse, bgAudio } from "./ambientSounds.js"
 import { Selectors } from "./selectors.js"
-import Sound from "./sounds.js"
 import { clickButtonMinun, clickButtonMinunFalse, clickButtonPlay, clickButtonPlus, clickButtonStop } from "./svg_path.js"
-
-const finishTimerSound = Sound()
 
 const play = Selectors.play
 const stop = Selectors.stop
@@ -53,6 +50,8 @@ function countDown(){
         timerDisplayOn()
         
         buttonsPointerEventsAll()
+        
+        play.style.pointerEvents = "none"
 
         setTimer  = setMinutes * 60 + setSeconds
         let interval = 1000
@@ -69,7 +68,7 @@ function countDown(){
 
             if(--setTimer < 0){
                 finishTimer()
-                finishTimerSound.timeEnd()
+                bgAudio.timeEnd()
             }
 
         }, interval);
@@ -81,6 +80,7 @@ function finishTimer(){
     bgAudio.pauseAllSound()
     setSeconds = undefined
     setMinutes = undefined
+    play.style.pointerEvents = "all"
     checkedFalse()
     clearInterval(intervalTimer)
 }
