@@ -16,6 +16,14 @@ const btnPlaySvgPath = btnPlaySvg.querySelector("path")
 const btnStopSvg = Selectors.btnStop.querySelector("svg")
 const btnStopSvgPath = btnStopSvg.querySelector("path")
 
+const soundsSelect = Selectors.soundsSelect
+
+function theme(color){
+    for(let select of soundsSelect){
+        let path = select.querySelector("path")
+        path.setAttribute("fill", color)
+    }
+}
 
 function clickButtonPlus(){
     eventClickButtons(btnPlusSvgPath)
@@ -57,4 +65,11 @@ function eventClickButtons(button){
     },40)
 }
 
-export {clickButtonPlay, clickButtonStop ,clickButtonPlus, clickButtonMinun, clickButtonMinunFalse}
+export {
+    clickButtonPlay, 
+    clickButtonStop,
+    clickButtonPlus, 
+    clickButtonMinun, 
+    clickButtonMinunFalse,
+    theme
+}
