@@ -36,6 +36,7 @@ function bgSound(e){
     function setBgSound(theme, themeVolume){
         bgAudio.playSound(theme)
         themeVolume.value = "0.5"
+        theme.volume = themeVolume.value
     }
     
 }
